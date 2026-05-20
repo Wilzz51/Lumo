@@ -24,7 +24,51 @@
 @endsection
 @section('content')
 
-@php($homepageStyle = theme_config('homepage_style', '1'))
+@php
+    $homepageStyle = theme_config('homepage_style', '1');
+    $statCards = [
+        [
+            'label'    => __('global.invoices'),
+            'value'    => $invoicesCount,
+            'link'     => route('front.invoices.index'),
+            'gradient' => 'linear-gradient(135deg,#f59e0b,#f97316)',
+            'glow'     => 'rgba(245,158,11,0.25)',
+            'accent'   => '#f59e0b',
+            'icon'     => '<path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/>',
+            'badge'    => $pending != 0 ? $pending : null,
+        ],
+        [
+            'label'    => __('global.services'),
+            'value'    => $servicesCount,
+            'link'     => route('front.services.index'),
+            'gradient' => 'linear-gradient(135deg,#7c3aed,#c026d3)',
+            'glow'     => 'rgba(124,58,237,0.25)',
+            'accent'   => '#9333ea',
+            'icon'     => '<rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>',
+            'badge'    => null,
+        ],
+        [
+            'label'    => __('global.balance'),
+            'value'    => formatted_price(auth()->user()->balance),
+            'link'     => route('front.payment-methods.index'),
+            'gradient' => 'linear-gradient(135deg,#10b981,#0d9488)',
+            'glow'     => 'rgba(16,185,129,0.25)',
+            'accent'   => '#10b981',
+            'icon'     => '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+            'badge'    => null,
+        ],
+        [
+            'label'    => __('global.tickets'),
+            'value'    => $ticketsCount,
+            'link'     => route('front.support.index'),
+            'gradient' => 'linear-gradient(135deg,#3b82f6,#6366f1)',
+            'glow'     => 'rgba(59,130,246,0.25)',
+            'accent'   => '#3b82f6',
+            'icon'     => '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+            'badge'    => null,
+        ],
+    ];
+@endphp
 
 {{-- ============================================================ --}}
 {{-- STYLE 1 — Dashboard (défaut) --}}
@@ -56,58 +100,45 @@
         @include("shared.alerts")
 
         {{-- Stat cards --}}
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <div class="flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800 dark:border-gray-700">
-                <div class="p-5 flex gap-x-4 items-center">
-                    <div class="flex-shrink-0 flex justify-center items-center w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl shadow-sm">
-                        <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            @foreach($statCards as $card)
+            <a href="{{ $card['link'] }}"
+               class="group relative flex flex-col rounded-xl border overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5"
+               style="{{ is_darkmode() ? 'background:rgba(15,5,39,0.85);border-color:rgba(109,40,217,0.2)' : 'background:#ffffff;border-color:#f3f4f6' }}">
+
+                {{-- Ligne accent en haut --}}
+                <div class="h-[3px]" style="background:{{ $card['gradient'] }}"></div>
+
+                <div class="p-5 flex items-center gap-4">
+                    {{-- Icône --}}
+                    <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+                         style="background:{{ $card['gradient'] }};box-shadow:0 4px 14px {{ $card['glow'] }}">
+                        <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{!! $card['icon'] !!}</svg>
                     </div>
-                    <div class="grow">
-                        <div class="flex items-center gap-x-2">
-                            <p class="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">{{ __('global.invoices') }}</p>
-                            @if ($pending != 0)
-                                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-100 dark:bg-red-900/30">
-                                    <svg class="w-3 h-3 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                                </span>
+
+                    {{-- Valeur --}}
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2 mb-1">
+                            <p class="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 truncate">{{ $card['label'] }}</p>
+                            @if($card['badge'])
+                                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full text-[10px] font-bold text-white" style="background:#ef4444">{{ $card['badge'] }}</span>
                             @endif
                         </div>
-                        <h3 class="mt-1 text-2xl font-bold text-gray-800 dark:text-white">{{ $invoicesCount }}</h3>
+                        <p class="text-2xl font-extrabold {{ is_darkmode() ? 'text-white' : 'text-gray-900' }} truncate">{{ $card['value'] }}</p>
                     </div>
                 </div>
-            </div>
-            <div class="flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800 dark:border-gray-700">
-                <div class="p-5 flex gap-x-4 items-center">
-                    <div class="flex-shrink-0 flex justify-center items-center w-12 h-12 bg-gradient-to-br from-violet-500 to-fuchsia-600 rounded-xl shadow-sm">
-                        <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-                    </div>
-                    <div class="grow">
-                        <p class="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">{{ __('global.services') }}</p>
-                        <h3 class="mt-1 text-2xl font-bold text-gray-800 dark:text-white">{{ $servicesCount }}</h3>
-                    </div>
+
+                {{-- Footer --}}
+                <div class="px-5 py-2.5 border-t flex items-center justify-between"
+                     style="{{ is_darkmode() ? 'border-color:rgba(109,40,217,0.15);background:rgba(109,40,217,0.05)' : 'border-color:#f9fafb;background:#fafafa' }}">
+                    <span class="text-xs font-medium transition-colors duration-200"
+                          style="color:{{ $card['accent'] }}">
+                        Voir les détails
+                    </span>
+                    <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" style="color:{{ $card['accent'] }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                 </div>
-            </div>
-            <div class="flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800 dark:border-gray-700">
-                <div class="p-5 flex gap-x-4 items-center">
-                    <div class="flex-shrink-0 flex justify-center items-center w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-xl shadow-sm">
-                        <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                    </div>
-                    <div class="grow">
-                        <p class="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">{{ __('global.balance') }}</p>
-                        <h3 class="mt-1 text-2xl font-bold text-gray-800 dark:text-white">{{ formatted_price(auth()->user()->balance) }}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200 dark:bg-gray-800 dark:border-gray-700">
-                <div class="p-5 flex gap-x-4 items-center">
-                    <div class="flex-shrink-0 flex justify-center items-center w-12 h-12 bg-gradient-to-br from-sky-400 to-blue-600 rounded-xl shadow-sm">
-                        <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                    </div>
-                    <div class="grow">
-                        <p class="text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">{{ __('global.tickets') }}</p>
-                        <h3 class="mt-1 text-2xl font-bold text-gray-800 dark:text-white">{{ $ticketsCount }}</h3>
-                    </div>
-                </div>
-            </div>
+            </a>
+            @endforeach
         </div>
 
         <div class="flex flex-col md:flex-row gap-4 mt-6 items-start">

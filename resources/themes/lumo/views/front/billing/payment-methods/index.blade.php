@@ -18,6 +18,49 @@
 ?>
 
 @extends('layouts/client')
+@section('styles')
+<style>
+    /* ═══ LUMO — Payment methods page overrides (no build needed) ═══ */
+
+    /* Tous les boutons du fund/giftcard → dégradé violet */
+    .lumo-ext-card button,
+    .lumo-ext-card input[type="submit"],
+    .lumo-ext-card a[role="button"] {
+        background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+        border-color: transparent !important;
+        box-shadow: 0 2px 10px rgba(124,58,237,0.35) !important;
+        color: #fff !important;
+        border-radius: 0.5rem !important;
+        font-weight: 600 !important;
+        transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .lumo-ext-card button:hover { transform: translateY(-1px) !important; }
+
+    /* Garder les boutons danger en rouge */
+    .lumo-ext-card button[class*="red"],
+    .lumo-ext-card button[class*="danger"] {
+        background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+        box-shadow: 0 2px 8px rgba(220,38,38,0.3) !important;
+    }
+
+    /* Tous les boutons de la section "Ajouter un moyen de paiement" → violet */
+    .gateway-form-wrapper button,
+    .gateway-form-wrapper input[type="submit"],
+    .gateway-form-wrapper a[role="button"] {
+        background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+        border-color: transparent !important;
+        box-shadow: 0 2px 10px rgba(124,58,237,0.35) !important;
+        color: #fff !important;
+        border-radius: 0.5rem !important;
+        font-weight: 600 !important;
+        width: 100% !important;
+        display: block !important;
+        text-align: center !important;
+        padding: 0.625rem 1rem !important;
+    }
+    .gateway-form-wrapper button:hover { transform: translateY(-1px) !important; }
+</style>
+@endsection
 @section('scripts')
     <script>
         function showBillingDayForm(serviceId, currentDay) {
@@ -142,28 +185,50 @@
                 @endif
             </div>
 
-            {{-- Ajouter un moyen de paiement --}}
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div class="rounded-xl border overflow-hidden shadow-sm bg-white dark:bg-[#0f0527] border-gray-100 dark:border-violet-900/20">
-                    <div class="px-5 py-4 border-b border-gray-100 dark:border-violet-900/20">
-                        <h2 class="text-base font-semibold text-gray-800 dark:text-white">{{ __('client.payment-methods.add') }}</h2>
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{{ __('client.payment-methods.add_description') }}</p>
+            {{-- Ajouter un moyen de paiement + Créditer --}}
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 items-start">
+
+                {{-- Ajouter un moyen de paiement --}}
+                <div class="rounded-xl border overflow-hidden shadow-sm bg-white dark:bg-[#0f0527] border-gray-100 dark:border-violet-900/20 self-start">
+                    <div class="px-5 py-3.5 flex items-center gap-3 border-b border-gray-100 dark:border-violet-900/20">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-violet-100 dark:bg-violet-900/30 flex-shrink-0">
+                            <svg class="w-4 h-4 text-violet-600 dark:text-violet-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                        </div>
+                        <div>
+                            <h2 class="text-sm font-semibold text-gray-800 dark:text-white">{{ __('client.payment-methods.add') }}</h2>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{{ __('client.payment-methods.add_description') }}</p>
+                        </div>
                     </div>
-                    <div class="p-5">
-                        @foreach ($gateways as $gateway)
-                            <form method="POST" action="{{ route('front.payment-methods.add', $gateway->id) }}" id="payment-form-{{ $gateway->uuid }}">
-                                @csrf
-                                {!! $gateway->paymentType()->sourceForm() !!}
-                            </form>
-                        @endforeach
-                    </div>
+                    @if(count($gateways) === 0)
+                        <div class="flex flex-col items-center justify-center py-8 px-5">
+                            <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800/50 flex items-center justify-center mb-3">
+                                <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('global.no_results') }}</p>
+                        </div>
+                    @else
+                        <div class="p-4 flex flex-col gap-3">
+                            @foreach ($gateways as $gateway)
+                                <div class="gateway-form-wrapper rounded-lg border border-gray-100 dark:border-violet-900/20 bg-gray-50/50 dark:bg-violet-900/5 p-3">
+                                    <form method="POST" action="{{ route('front.payment-methods.add', $gateway->id) }}" id="payment-form-{{ $gateway->uuid }}">
+                                        @csrf
+                                        {!! $gateway->paymentType()->sourceForm() !!}
+                                    </form>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
 
                 @if(app('extension')->extensionIsEnabled('fund'))
-                    @include('fund::card')
+                    <div class="lumo-ext-card">
+                        @include('fund::card')
+                    </div>
                 @endif
                 @if(app('extension')->extensionIsEnabled('giftcard'))
-                    @include('giftcard::card')
+                    <div class="lumo-ext-card">
+                        @include('giftcard::card')
+                    </div>
                 @endif
             </div>
         </div>

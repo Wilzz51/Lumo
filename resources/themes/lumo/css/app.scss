@@ -174,3 +174,217 @@
     dark:[&::-webkit-scrollbar-track]:bg-neutral-700
     dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500;
 }
+
+/* ===== EXTENSION CARDS (fund, giftcard) ===== */
+.lumo-ext-card > .card,
+.lumo-ext-card .card {
+    border-radius: 0.75rem !important;
+    border: 1px solid #f3f4f6 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+    overflow: hidden;
+    margin-bottom: 0 !important;
+    background: #fff !important;
+}
+.dark .lumo-ext-card > .card,
+.dark .lumo-ext-card .card {
+    background: rgba(15,5,39,0.85) !important;
+    border-color: rgba(109,40,217,0.2) !important;
+}
+
+/* Card header */
+.lumo-ext-card .card-header {
+    background: transparent !important;
+    border-bottom: 1px solid #f3f4f6 !important;
+    padding: 1rem 1.25rem !important;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #1f2937 !important;
+}
+.dark .lumo-ext-card .card-header {
+    border-bottom-color: rgba(109,40,217,0.15) !important;
+    color: #fff !important;
+}
+.lumo-ext-card .card-header p,
+.lumo-ext-card .card-header small,
+.lumo-ext-card .card-header .text-muted {
+    font-size: 0.75rem;
+    color: #6b7280 !important;
+    font-weight: 400;
+    margin-top: 0.125rem;
+}
+
+/* Card body */
+.lumo-ext-card .card-body {
+    padding: 1.25rem !important;
+}
+
+/* Inputs */
+.lumo-ext-card input[type="number"],
+.lumo-ext-card input[type="text"],
+.lumo-ext-card input[type="email"],
+.lumo-ext-card select,
+.lumo-ext-card textarea {
+    width: 100%;
+    padding: 0.625rem 1rem !important;
+    border-radius: 0.5rem !important;
+    border: 1px solid #e5e7eb !important;
+    font-size: 0.875rem !important;
+    transition: border-color 0.15s;
+    background: #fff !important;
+    color: #1f2937 !important;
+}
+.lumo-ext-card input[type="number"]:focus,
+.lumo-ext-card input[type="text"]:focus,
+.lumo-ext-card select:focus {
+    outline: none !important;
+    border-color: #7c3aed !important;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.1) !important;
+}
+.dark .lumo-ext-card input[type="number"],
+.dark .lumo-ext-card input[type="text"],
+.dark .lumo-ext-card input[type="email"],
+.dark .lumo-ext-card select,
+.dark .lumo-ext-card textarea {
+    background: #0a0120 !important;
+    border-color: rgba(109,40,217,0.3) !important;
+    color: #f3f4f6 !important;
+}
+
+/* Labels */
+.lumo-ext-card label,
+.lumo-ext-card .form-label {
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    color: #374151 !important;
+    margin-bottom: 0.375rem;
+}
+.dark .lumo-ext-card label,
+.dark .lumo-ext-card .form-label {
+    color: #d1d5db !important;
+}
+
+/* Tous les boutons → violet gradient */
+.lumo-ext-card .btn,
+.lumo-ext-card button[type="submit"],
+.lumo-ext-card .btn-success,
+.lumo-ext-card .btn-primary,
+.lumo-ext-card .btn-green {
+    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+    border-color: transparent !important;
+    box-shadow: 0 2px 8px rgba(124,58,237,0.3) !important;
+    border-radius: 0.5rem !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    color: #fff !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+    padding: 0.5rem 1.25rem !important;
+}
+.lumo-ext-card .btn:hover,
+.lumo-ext-card button[type="submit"]:hover,
+.lumo-ext-card .btn-success:hover,
+.lumo-ext-card .btn-primary:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 16px rgba(124,58,237,0.4) !important;
+    color: #fff !important;
+}
+
+/* Bouton danger → reste rouge */
+.lumo-ext-card .btn-danger {
+    background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+    box-shadow: 0 2px 8px rgba(220,38,38,0.3) !important;
+}
+
+/* Résumé / summary panel */
+.lumo-ext-card [class*="bg-gray"],
+.lumo-ext-card .bg-light,
+.lumo-ext-card .summary,
+.lumo-ext-card .card-summary {
+    background: #f9fafb !important;
+    border-radius: 0.5rem !important;
+    border: 1px solid #f3f4f6 !important;
+}
+.dark .lumo-ext-card [class*="bg-gray"],
+.dark .lumo-ext-card .bg-light {
+    background: rgba(109,40,217,0.05) !important;
+    border-color: rgba(109,40,217,0.1) !important;
+}
+
+/* Alertes warning */
+.lumo-ext-card .alert-warning,
+.lumo-ext-card .alert.alert-warning {
+    background: rgba(251,191,36,0.1) !important;
+    border-color: rgba(251,191,36,0.3) !important;
+    border-radius: 0.5rem !important;
+    color: #92400e !important;
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem !important;
+}
+.dark .lumo-ext-card .alert-warning {
+    color: #fbbf24 !important;
+    background: rgba(251,191,36,0.08) !important;
+}
+
+/* Alertes info */
+.lumo-ext-card .alert-info {
+    background: rgba(99,102,241,0.08) !important;
+    border-color: rgba(99,102,241,0.2) !important;
+    border-radius: 0.5rem !important;
+    color: #4338ca !important;
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem !important;
+}
+
+/* Tables (historique des transferts) */
+.lumo-ext-card table {
+    width: 100%;
+    font-size: 0.875rem;
+}
+.lumo-ext-card table thead th {
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: #6b7280 !important;
+    padding: 0.625rem 1rem !important;
+    background: #f9fafb !important;
+    border-bottom: 1px solid #f3f4f6 !important;
+}
+.dark .lumo-ext-card table thead th {
+    background: rgba(109,40,217,0.08) !important;
+    color: #9ca3af !important;
+    border-bottom-color: rgba(109,40,217,0.15) !important;
+}
+.lumo-ext-card table tbody td {
+    padding: 0.75rem 1rem !important;
+    border-bottom: 1px solid #f9fafb !important;
+    color: #374151;
+}
+.dark .lumo-ext-card table tbody td {
+    border-bottom-color: rgba(109,40,217,0.08) !important;
+    color: #d1d5db !important;
+}
+.lumo-ext-card table tbody tr:hover td {
+    background: rgba(124,58,237,0.03) !important;
+}
+
+/* "Aucun résultat" */
+.lumo-ext-card .text-muted,
+.lumo-ext-card .text-gray-500 {
+    color: #9ca3af !important;
+    font-size: 0.875rem;
+}
+
+/* ===== GATEWAY FORMS (Ajouter un moyen de paiement) ===== */
+/* Override les boutons verts/bleus des gateways */
+#content .gateway-form-wrapper button[type="submit"],
+#content .gateway-form-wrapper .btn-success,
+#content .gateway-form-wrapper .btn-primary {
+    background: linear-gradient(135deg, #7c3aed, #a855f7) !important;
+    border-color: transparent !important;
+    box-shadow: 0 2px 8px rgba(124,58,237,0.3) !important;
+    border-radius: 0.5rem !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    width: 100%;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
