@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'btn.css';
+@import 'provisioning.css';
+@import 'bootstrap-icons/font/bootstrap-icons.min.css';
+@import 'flatpickr/dist/flatpickr.min.css';
+.input-text {
+    @apply py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm transition-colors duration-200 focus:border-violet-500 focus:ring-violet-500 disabled:opacity-50 disabled:pointer-events-none;
+}
+.img-auth {
+    border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+}
+.text-primary {
+    @apply text-violet-600;
+}
+.text-secondary {
+    @apply text-gray-600;
+}
+.text-danger {
+    @apply text-red-600;
+}
+.text-warning {
+    @apply text-yellow-600;
+}
+.bg-primary {
+    @apply bg-violet-600;
+}
+.card {
+    @apply bg-white rounded-xl shadow-sm p-6 mb-4 border border-gray-100
+}
+.card-sm {
+    @apply bg-white rounded-xl shadow-sm p-3 mb-4 border border-gray-100
+}
+.card-title {
+    @apply text-lg font-semibold mb-2
+}
+.card-heading {
+    @apply pb-2 grid gap-3 md:flex md:justify-between md:items-center dark:border-gray-700;
+}
+.w-50 {
+    width: 50%!important;
+}
+.vps-running {
+    @apply bg-emerald-600;
+}
+.vps-stopped {
+    @apply bg-red-600;
+}
+.vps-warning {
+    @apply bg-yellow-600;
+}
+
+.gateway-selected {
+    @apply border-violet-600 bg-violet-50 text-violet-600;
+}
+.dark .card {
+    @apply bg-gray-800 text-white rounded-xl border border-gray-700/50 p-6 mb-4
+}
+.dark .card-sm {
+    @apply bg-gray-800 text-white rounded-xl border border-gray-700/50 p-3 mb-2
+}
+.dark #content {
+    background: #07001a;
+    @apply text-white;
+}
+.dark .card {
+    background: rgba(15,5,39,0.85);
+    border-color: rgba(109,40,217,0.2);
+}
+.dark .input-text {
+    @apply bg-gray-700 border-gray-600 text-gray-300 placeholder-gray-500
+}
+.dark .text-danger {
+    @apply text-red-400
+}
+.dark .text-warning {
+    @apply text-yellow-400
+}
+.dark .gateway-selected {
+    @apply border-violet-400 bg-violet-900/30 text-violet-400
+}
+
+/* ===== SERVICE SHOW SIDEBAR ===== */
+.sidebar-info-card {
+    @apply flex items-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm;
+}
+.sidebar-info-icon {
+    @apply flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center shadow-sm;
+}
+.sidebar-action-btn {
+    @apply w-full inline-flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-semibold border transition-all duration-200;
+    @apply bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-600;
+    @apply hover:border-violet-300 dark:hover:border-violet-600 hover:text-violet-700 dark:hover:text-violet-300 hover:bg-violet-50 dark:hover:bg-violet-900/20;
+}
+.sidebar-action-btn--primary {
+    @apply text-white border-transparent hover:border-transparent hover:text-white hover:bg-transparent;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    box-shadow: 0 2px 10px rgba(124, 58, 237, 0.25);
+}
+.sidebar-action-btn--primary:hover {
+    background: linear-gradient(135deg, #6d28d9, #9333ea);
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+}
+.sidebar-action-btn--violet {
+    @apply text-violet-600 dark:text-violet-400 border-violet-200 dark:border-violet-700 bg-violet-50 dark:bg-violet-900/20;
+    @apply hover:bg-violet-100 dark:hover:bg-violet-900/40 hover:text-violet-700 dark:hover:text-violet-300 hover:border-violet-300;
+}
+.sidebar-action-btn--danger {
+    @apply text-red-600 dark:text-red-400 border-red-200 dark:border-red-800/50 bg-red-50 dark:bg-red-900/10;
+    @apply hover:bg-red-100 dark:hover:bg-red-900/20 hover:border-red-300 hover:text-red-700;
+}
+
+/* ===== PRODUCT CARDS ===== */
+.product-card-pinned {
+    background: #ffffff;
+    border: 2px solid #7c3aed;
+}
+.dark .product-card-pinned {
+    background: #1a0f35;
+    border-color: #6d28d9;
+}
+
+/* ===== PAGE BANNERS (store, group, etc.) ===== */
+.page-banner-dark {
+    background: linear-gradient(135deg, #3b0764 0%, #4c1d95 40%, #701a75 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== HOME PAGE HERO / HEADER ===== */
+/* Ces classes utilisent du CSS pur (pas @apply) donc jamais purgées par Tailwind */
+.hero-header {
+    background: linear-gradient(135deg, #4c1d95 0%, #5b21b6 50%, #6d28d9 100%);
+    border-bottom-color: rgba(139, 92, 246, 0.25) !important;
+}
+.hero-header-overlay {
+    background: #4c1d95;
+}
+.hero-nav-menu {
+    background: linear-gradient(135deg, #4c1d95 0%, #5b21b6 100%);
+    border-color: rgba(139, 92, 246, 0.2);
+}
+.hero-section-bg {
+    background: linear-gradient(135deg, #4c1d95 0%, #5b21b6 40%, #701a75 100%);
+}
+
+.ProseMirror:focus {
+    outline: none;
+}
+
+.blur {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+}
+
+.blur:hover {
+    filter: none;
+}
+.dark .os-icon {
+    @apply text-gray-400;
+}
+.icon-width::before {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+.custom-scroll {
+    @apply overflow-y-auto
+    [&::-webkit-scrollbar]:w-2
+    [&::-webkit-scrollbar-track]:bg-gray-100
+    [&::-webkit-scrollbar-thumb]:bg-gray-300
+    dark:[&::-webkit-scrollbar-track]:bg-neutral-700
+    dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500;
+}

@@ -1,0 +1,114 @@
+
+.btn-primary {
+    @apply rounded-lg bg-violet-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600;
+}
+.btn-secondary {
+    @apply rounded-lg bg-gray-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-200;
+}
+.btn-danger {
+    @apply rounded-lg bg-red-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600;
+}
+.btn-info {
+    @apply rounded-lg bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600;
+}
+.btn-warning {
+    @apply rounded-lg bg-yellow-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-yellow-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600;
+}
+button.btn-primary:hover, a.btn-primary:hover, .prose a.btn-primary:hover {
+    @apply bg-violet-700;
+}
+.button.btn-info:hover, a.btn-info:hover, .prose a.btn-info:hover {
+    @apply bg-blue-700;
+}
+button.btn-secondary:hover,a.btn-secondary:hover, .prose a.btn-secondary:hover {
+    @apply bg-gray-700;
+}
+button.btn-danger:hover, a.btn-danger:hover, .prose a.btn-danger:hover {
+    @apply bg-red-700;
+}
+
+button.btn-warning:hover, a.btn-warning:hover, .prose a.btn-warning:hover {
+    @apply bg-yellow-700;
+}
+
+.btn-action-with-icon {
+    @apply py-1 px-2 inline-flex items-center gap-2 rounded-lg border font-medium bg-white text-gray-700 shadow-sm align-middle transition-colors duration-200 text-sm;
+}
+.btn-action-with-icon:hover {
+    @apply bg-gray-50;
+}
+.btn-action-with-icon:focus {
+    @apply outline-none ring-2 ring-offset-white focus:ring-violet-600;
+}
+.btn-product {
+    @apply inline-flex justify-center items-center gap-x-2 py-3 px-5 text-sm font-semibold rounded-xl text-white transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 disabled:pointer-events-none disabled:transform-none;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.3);
+}
+.btn-product:hover {
+    background: linear-gradient(135deg, #6d28d9, #9333ea);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45);
+}
+
+.btn-product-pinned {
+    @apply inline-flex justify-center items-center gap-x-2 py-3.5 px-5 text-sm font-semibold rounded-xl text-white transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 disabled:pointer-events-none disabled:transform-none;
+    background: linear-gradient(135deg, #6d28d9, #c026d3);
+    box-shadow: 0 4px 20px rgba(109, 40, 217, 0.4);
+}
+.btn-product-pinned:hover {
+    background: linear-gradient(135deg, #5b21b6, #a21caf);
+    box-shadow: 0 6px 24px rgba(109, 40, 217, 0.55);
+}
+.btn-icon {
+    @apply w-9 h-9 mr-2 relative inline-flex justify-center items-center text-sm font-semibold rounded-lg border transition-colors duration-200;
+}
+.btn-icon:disabled {
+    @apply opacity-50 pointer-events-none;
+}
+.btn-icon:hover {
+    @apply bg-gray-100;
+}
+.btn-icon2 {
+    @apply w-9 h-9 relative inline-flex justify-center items-center text-sm font-semibold rounded-lg text-gray-800 z-20 transition-colors duration-200;
+}
+.btn-icon2:hover {
+    @apply bg-gray-100;
+}
+.btn-icon2:disabled {
+    @apply opacity-50 pointer-events-none;
+}
+
+/**
+Darkmode
+ */
+.dark .btn-primary:hover {
+    @apply bg-violet-700
+}
+.dark .btn-icon2 {
+    @apply text-white border-gray-700
+}
+.dark .btn-icon2:hover {
+    @apply bg-gray-700
+}
+.dark .btn-icon2:focus {
+    @apply outline-none ring-1 ring-gray-600
+}
+.dark .btn-primary:focus {
+    @apply outline-none ring-1 ring-violet-400
+}
+.dark .btn-info:hover {
+    @apply bg-blue-700
+}
+.dark .btn-icon {
+    @apply border-gray-700 text-gray-400
+}
+
+.dark .btn-action-with-icon {
+    @apply bg-slate-900 border-gray-700 text-gray-400
+}
+.dark .btn-action-with-icon:hover {
+    @apply bg-slate-800 text-white
+}
+.dark .btn-action-with-icon:focus {
+    @apply ring-offset-gray-800
+}

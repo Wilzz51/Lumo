@@ -1,0 +1,17 @@
+{
+    "hero_badge": "Hébergement nouvelle génération",
+    "hero_title": "",
+    "hero_subtitle": "Des solutions d'hébergement haute performance, disponibles 24h/24, avec un support réactif.",
+    "hero_cta_primary_text": "Voir nos offres",
+    "hero_cta_primary_url": "",
+    "hero_cta_secondary_text": "Espace client",
+    "hero_cta_secondary_url": "",
+    "hero_stat1_value": "99.9%",
+    "hero_stat1_label": "Disponibilité",
+    "hero_stat2_value": "24/7",
+    "hero_stat2_label": "Support",
+    "hero_stat3_value": "NVMe",
+    "hero_stat3_label": "Stockage",
+    "hero_stat4_value": "Anti-DDoS",
+    "hero_stat4_label": "Protection"
+}
