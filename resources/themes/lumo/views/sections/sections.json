@@ -48,8 +48,6 @@
         "path": "sections.lumo_why_choose",
         "uuid": "lumo_why_choose",
         "default": true,
-        "default_url": "/",
-        "section_type": 2,
-        "protected": true
+        "default_url": "/"
     }
 ]
