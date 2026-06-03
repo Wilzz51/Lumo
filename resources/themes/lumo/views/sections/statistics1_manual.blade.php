@@ -1,8 +1,8 @@
 <div class="relative overflow-hidden bg-white dark:bg-gray-950 py-16 sm:py-24">
-    {{-- Background orbs (dark mode only) --}}
+
     <div class="hidden dark:block absolute top-0 left-1/4 w-72 h-72 bg-violet-600/15 rounded-full blur-3xl pointer-events-none"></div>
     <div class="hidden dark:block absolute bottom-0 right-1/4 w-72 h-72 bg-fuchsia-600/10 rounded-full blur-3xl pointer-events-none"></div>
-    {{-- Light mode subtle gradient --}}
+
     <div class="block dark:hidden absolute inset-0 bg-gradient-to-br from-violet-50/60 to-fuchsia-50/30 pointer-events-none"></div>
 
     <div class="relative max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">

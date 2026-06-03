@@ -18,35 +18,79 @@
 ?>
 
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full ">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full {{ is_darkmode() ? 'dark' : '' }}">
 <head>
-    {{-- ... --}}
     <title>{{ __('maintenance.in_maintenance_title') }} - {{ config('app.name') }}</title>
-    @yield('styles')
-    @vite('resources/themes/default/css/app.scss')
-    @vite('resources/themes/default/js/app.js')
-    {!! app('seo')->head() !!}
-    {!! app('seo')->favicon() !!}
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @vite('resources/themes/lumo/css/app.scss')
+    {!! app('seo')->favicon() !!}
 </head>
-<body class="{{is_darkmode() ? 'dark' : '' }} flex flex-col h-full">
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-violet-700 via-violet-600 to-fuchsia-600 relative overflow-hidden">
 
-<section class="dark:bg-gray-900 h-full content-center">
-    <div class="px-4 mx-auto max-w-screen-md text-center lg:px-12">
-        <img src="{{ setting('app_logo_text') }}" class="mx-auto h-32 w-auto mb-16">
-        <svg class="mx-auto mb-4 w-10 h-10 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M331.8 224.1c28.29 0 54.88 10.99 74.86 30.97l19.59 19.59c40.01-17.74 71.25-53.3 81.62-96.65c5.725-23.92 5.34-47.08 .2148-68.4c-2.613-10.88-16.43-14.51-24.34-6.604l-68.9 68.9h-75.6V97.2l68.9-68.9c7.912-7.912 4.275-21.73-6.604-24.34c-21.32-5.125-44.48-5.51-68.4 .2148c-55.3 13.23-98.39 60.22-107.2 116.4C224.5 128.9 224.2 137 224.3 145l82.78 82.86C315.2 225.1 323.5 224.1 331.8 224.1zM384 278.6c-23.16-23.16-57.57-27.57-85.39-13.9L191.1 158L191.1 95.99l-127.1-95.99L0 63.1l96 127.1l62.04 .0077l106.7 106.6c-13.67 27.82-9.251 62.23 13.91 85.39l117 117.1c14.62 14.5 38.21 14.5 52.71-.0016l52.75-52.75c14.5-14.5 14.5-38.08-.0016-52.71L384 278.6zM227.9 307L168.7 247.9l-148.9 148.9c-26.37 26.37-26.37 69.08 0 95.45C32.96 505.4 50.21 512 67.5 512s34.54-6.592 47.72-19.78l119.1-119.1C225.5 352.3 222.6 329.4 227.9 307zM64 472c-13.25 0-24-10.75-24-24c0-13.26 10.75-24 24-24S88 434.7 88 448C88 461.3 77.25 472 64 472z"/></svg>
-        <h1 class="mb-4 text-4xl font-bold tracking-tight leading-none text-gray-900 lg:mb-6 md:text-5xl xl:text-6xl dark:text-white">
-            {{ __('maintenance.in_maintenance_title') }}</h1>
-        <p class="font-light text-gray-500 md:text-lg xl:text-xl dark:text-gray-400">{{ setting('maintenance_message') }}</p>
-        @if (setting('maintenance_button_url'))
-        <a href="{{ setting('maintenance_button_url') }}" class="mt-4 py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-blue-600 text-indigo-600 hover:border-indigo-500 hover:text-indigo-500 disabled:opacity-50 disabled:pointer-events-none dark:border-indigo-500 dark:text-indigo-500 dark:hover:text-indigo-400 dark:hover:border-indigo-400">
-            <i class="{{ setting('maintenance_button_icon') }} flex-shrink-0"></i>
-            {{ setting('maintenance_button_text') }}
-        </a>
-        @endif
+    {{-- Cercles décoratifs (même style que le layout auth) --}}
+    <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/4 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
+
+    {{-- Card centrale --}}
+    <div class="relative z-10 w-full max-w-md mx-4">
+        <div class="bg-white dark:bg-gray-800 border border-white/20 rounded-2xl shadow-2xl overflow-hidden">
+
+            {{-- Header violet (logo + badge) --}}
+            <div class="bg-gradient-to-br from-violet-700 via-violet-600 to-fuchsia-600 px-8 pt-8 pb-10 text-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/4"></div>
+                @if(setting('app_logo_text'))
+                    <img src="{{ setting('app_logo_text') }}" alt="{{ config('app.name') }}"
+                         class="h-10 w-auto mx-auto mb-5 brightness-0 invert relative z-10">
+                @endif
+                {{-- Icône engrenage --}}
+                <div class="relative z-10 mx-auto w-16 h-16 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center shadow-lg">
+                    <svg style="width:1.75rem;height:1.75rem;color:#fff;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                </div>
+            </div>
+
+            {{-- Contenu --}}
+            <div class="px-8 py-7 text-center">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-violet-50 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-700/50 mb-4">
+                    <span class="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse inline-block"></span>
+                    {{ __('maintenance.in_maintenance_title') }}
+                </span>
+
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                    {{ config('app.name') }}
+                </h1>
+
+                <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
+                    {{ setting('maintenance_message') ?: __('maintenance.in_maintenance_title') }}
+                </p>
+
+                @if(setting('maintenance_button_url'))
+                    <a href="{{ setting('maintenance_button_url') }}"
+                       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:-translate-y-px"
+                       style="background:linear-gradient(135deg,#7c3aed,#a855f7);box-shadow:0 4px 16px rgba(124,58,237,0.35);">
+                        @if(setting('maintenance_button_icon'))
+                            <i class="{{ setting('maintenance_button_icon') }}"></i>
+                        @endif
+                        {{ setting('maintenance_button_text') }}
+                    </a>
+                @endif
+            </div>
+
+            {{-- Footer --}}
+            <div class="px-8 py-4 border-t border-gray-100 dark:border-gray-700 text-center">
+                <p class="text-xs text-gray-400 dark:text-gray-500">
+                    &copy; {{ date('Y') }} {{ setting('app_name') }}. All rights reserved.
+                </p>
+            </div>
+
+        </div>
     </div>
-</section>
+
 </body>
 </html>
-<!-- ========== END FOOTER ========== -->

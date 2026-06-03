@@ -4,6 +4,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>@include('admin/shared/input', ['name' => 'hero_badge', 'label' => 'Badge', 'type' => 'text', 'value' => theme_config('hero_badge', ''), 'placeholder' => 'Hébergement nouvelle génération'])</div>
         <div>@include('admin/shared/input', ['name' => 'hero_title', 'label' => 'Titre', 'type' => 'text', 'value' => theme_config('hero_title', ''), 'placeholder' => setting('app_name')])</div>
+        <div>@include('admin/shared/input', ['name' => 'hero_gradient_text', 'label' => 'Texte en dégradé', 'type' => 'text', 'value' => theme_config('hero_gradient_text', 'Haute Performance'), 'placeholder' => 'Haute Performance'])</div>
         <div style="grid-column:span 2">@include('admin/shared/input', ['name' => 'hero_subtitle', 'label' => 'Sous-titre', 'type' => 'text', 'value' => theme_config('hero_subtitle', ''), 'placeholder' => 'Des solutions d\'hébergement haute performance...'])</div>
     </div>
 </div>

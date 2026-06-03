@@ -18,35 +18,11 @@
         ['value' => theme_config('hero_stat3_value', 'NVMe'),     'label' => theme_config('hero_stat3_label', 'Stockage')],
         ['value' => theme_config('hero_stat4_value', 'Anti-DDoS'),'label' => theme_config('hero_stat4_label', 'Protection')],
     ];
+    $heroImageDb = \App\Models\Admin\Setting::where('name', 'theme_home_image')->value('value');
+    $heroImage   = $heroImageDb ? setting('theme_home_image', '') : '';
     $heroBg = $dm
         ? 'background:linear-gradient(135deg,#07001a 0%,#0f0527 45%,#0a0120 100%)'
         : 'background:linear-gradient(155deg,#faf7ff 0%,#f0ebff 45%,#ffffff 100%)';
-    $features = [
-        [
-            'icon'  => '<path d="M13 10V3L4 14h7v7l9-11h-7z"/>',
-            'title' => 'Performance NVMe',
-            'desc'  => 'Disques NVMe Gen4 en RAID pour des temps de chargement ultra-rapides sur tous vos projets.',
-            'color' => ['bg' => 'rgba(124,58,237,0.1)', 'border' => 'rgba(124,58,237,0.2)', 'icon' => '#8b5cf6'],
-        ],
-        [
-            'icon'  => '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
-            'title' => 'Anti-DDoS inclus',
-            'desc'  => 'Protection automatique contre les attaques. Votre infrastructure reste disponible en permanence.',
-            'color' => ['bg' => 'rgba(192,38,211,0.1)', 'border' => 'rgba(192,38,211,0.2)', 'icon' => '#c026d3'],
-        ],
-        [
-            'icon'  => '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
-            'title' => 'Support 24h/24',
-            'desc'  => 'Une équipe disponible à tout moment. Réponse garantie en moins d\'une heure sur chaque ticket.',
-            'color' => ['bg' => 'rgba(59,130,246,0.1)', 'border' => 'rgba(59,130,246,0.2)', 'icon' => '#3b82f6'],
-        ],
-        [
-            'icon'  => '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
-            'title' => 'SSL gratuit',
-            'desc'  => 'Certificats SSL/TLS inclus sur tous les plans. Vos visiteurs naviguent en sécurité dès le départ.',
-            'color' => ['bg' => 'rgba(16,185,129,0.1)', 'border' => 'rgba(16,185,129,0.2)', 'icon' => '#10b981'],
-        ],
-    ];
 @endphp
 
 {{-- ============================================================ --}}
@@ -88,7 +64,7 @@
                     {{ $title }}<br>
                     <span style="background:linear-gradient(130deg,#7c3aed 0%,#a855f7 50%,#c026d3 100%);
                                  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
-                        Haute Performance
+                        {{ theme_config('hero_gradient_text', 'Haute Performance') }}
                     </span>
                 </h1>
 
@@ -129,8 +105,17 @@
                 </div>
             </div>
 
-            {{-- DROITE : formes géométriques flottantes --}}
+            {{-- DROITE : image ou cartes géométriques --}}
             <div class="hidden lg:flex justify-center items-center">
+                @if($heroImage)
+                <div class="relative w-full max-w-lg">
+                    <div class="absolute inset-0" style="border-radius:32px;background:radial-gradient(circle,{{ $dm ? 'rgba(139,92,246,0.3)' : 'rgba(167,139,250,0.18)' }},transparent 70%);filter:blur(40px);transform:scale(1.1)"></div>
+                    <img src="{{ $heroImage }}"
+                         alt="Hero illustration"
+                         class="relative w-full h-auto rounded-3xl object-cover"
+                         style="max-height:460px;box-shadow:0 24px 64px rgba(109,40,217,{{ $dm ? '0.45' : '0.22' }})">
+                </div>
+                @else
                 <div class="relative" style="width:420px;height:420px">
 
                     {{-- Lueur centrale --}}
@@ -168,58 +153,15 @@
                     <div class="absolute" style="width:14px;height:14px;top:60px;right:20px;border-radius:5px;background:#e879f9;opacity:0.6"></div>
 
                 </div>
+                @endif
             </div>
 
         </div>
     </div>
 </section>
 
-{{-- ============================================================ --}}
-{{-- SECTION 2 : AVANTAGES                                        --}}
-{{-- ============================================================ --}}
-<section class="py-24" style="{{ $dm ? 'background:#06000f' : 'background:#f9fafb' }}">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div class="text-center mb-16">
-            <h2 class="font-extrabold tracking-tight mb-4"
-                style="font-size:clamp(1.8rem,3.5vw,2.8rem);color:{{ $dm ? '#f8f4ff' : '#0f0a1e' }}">
-                Pourquoi choisir
-                <span style="background:linear-gradient(130deg,#7c3aed,#c026d3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
-                    {{ setting('app_name') }} ?
-                </span>
-            </h2>
-            <p class="max-w-lg mx-auto text-base" style="color:{{ $dm ? 'rgba(255,255,255,0.45)' : '#6b7280' }}">
-                Une infrastructure pensée pour la performance, la sécurité et votre tranquillité d'esprit.
-            </p>
-        </div>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            @foreach($features as $f)
-            <div class="group rounded-2xl p-6 transition-all duration-200 hover:-translate-y-1"
-                 style="{{ $dm
-                     ? 'background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.06)'
-                     : 'background:#ffffff;border:1px solid #f3f4f6;box-shadow:0 2px 16px rgba(0,0,0,0.04)' }}">
-
-                <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-5 flex-shrink-0"
-                     style="background:{{ $f['color']['bg'] }};border:1px solid {{ $f['color']['border'] }}">
-                    <svg class="w-5 h-5" fill="none" stroke="{{ $f['color']['icon'] }}" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                        {!! $f['icon'] !!}
-                    </svg>
-                </div>
-
-                <h3 class="font-bold text-base mb-2" style="color:{{ $dm ? '#f1ecff' : '#111827' }}">
-                    {{ $f['title'] }}
-                </h3>
-                <p class="text-sm leading-relaxed" style="color:{{ $dm ? 'rgba(255,255,255,0.42)' : '#6b7280' }}">
-                    {{ $f['desc'] }}
-                </p>
-            </div>
-            @endforeach
-        </div>
-
-    </div>
-</section>
+{{-- ===== SECTIONS ADMIN (entre hero et contenu fixe) ===== --}}
+{!! render_theme_sections() !!}
 
 {{-- ============================================================ --}}
 {{-- SECTION 3 : CTA                                              --}}
@@ -263,8 +205,5 @@
         </div>
     </div>
 </section>
-
-{{-- ===== SECTIONS ADMIN ===== --}}
-{!! render_theme_sections() !!}
 
 @endsection

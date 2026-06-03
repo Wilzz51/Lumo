@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'hero_gradient_text'      => 'nullable|string|max:60',
     'hero_badge'              => 'nullable|string|max:80',
     'hero_title'              => 'nullable|string|max:255',
     'hero_subtitle'           => 'nullable|string|max:500',
