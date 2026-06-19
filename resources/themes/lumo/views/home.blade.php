@@ -92,6 +92,7 @@
                 </div>
 
                 {{-- Stats --}}
+                @if(theme_config('hero_show_stats', 'true') !== 'false')
                 <div class="flex flex-wrap gap-x-8 gap-y-4 pt-8"
                      style="border-top:1px solid {{ $dm ? 'rgba(255,255,255,0.08)' : '#ede9fe' }}">
                     @foreach($stats as $stat)
@@ -103,6 +104,7 @@
                         @endif
                     @endforeach
                 </div>
+                @endif
             </div>
 
             {{-- DROITE : image ou cartes géométriques --}}

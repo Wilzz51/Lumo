@@ -22,7 +22,10 @@
 
 {{-- ===== STATISTIQUES ===== --}}
 <div class="mt-6 border-t border-gray-200 dark:border-gray-700 pt-4">
-    <p class="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-3">Statistiques</p>
+    <div class="flex items-end justify-between gap-4 mb-3">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">Statistiques</p>
+        <div class="w-44">@include('admin/shared/select', ['name' => 'hero_show_stats', 'label' => 'Affichage', 'value' => theme_config('hero_show_stats', 'true'), 'options' => ['true' => 'Afficher', 'false' => 'Masquer']])</div>
+    </div>
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div>@include('admin/shared/input', ['name' => 'hero_stat1_value', 'label' => 'Valeur 1', 'type' => 'text', 'value' => theme_config('hero_stat1_value', '99.9%')])</div>
         <div>@include('admin/shared/input', ['name' => 'hero_stat1_label', 'label' => 'Label 1',  'type' => 'text', 'value' => theme_config('hero_stat1_label', 'Disponibilité')])</div>

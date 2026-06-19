@@ -49,5 +49,19 @@
         "uuid": "lumo_why_choose",
         "default": true,
         "default_url": "/"
+    },
+    {
+        "thumbnail": "https://api-nextgen.clientxcms.com/assets/f7a09df8-684b-45bd-a7b2-d65728b83363",
+        "path": "sections.lumo_datacenters",
+        "uuid": "lumo_datacenters",
+        "default": true,
+        "default_url": "/"
+    },
+    {
+        "thumbnail": "https://api-nextgen.clientxcms.com/assets/f7a09df8-684b-45bd-a7b2-d65728b83363",
+        "path": "sections.lumo_steps",
+        "uuid": "lumo_steps",
+        "default": true,
+        "default_url": "/"
     }
 ]
